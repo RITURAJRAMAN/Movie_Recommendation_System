@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Recommendation System</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.jpeg">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+<div class="background"></div>
+<div class="header">
+    <h1><a href="{{ url_for('home')}}">Movie Recommendation System</a></h1>
+
+</div>
+
+<form action="{{ url_for('recommend') }}" id="myform" method="POST" class="mainContainer">
+    <label for="title"></label>
+    <select class="searchbox" name="title" id="title" required>
+        <option value="" selected disabled hidden>Select a movie to get Recommendations</option>
+        {% for title in all_movie_list %}
+            <option value="{{ title }}">{{ title }}</option>
+        {% endfor %}
+    </select>
+    <button class="recommend" type="submit" form="myform">
+        <strong>Recommmend</strong>
+    </button>
+</form>
+<div class="searched_for">
+    <h1>Suggestions for movies similar to {{ searched_for }}</h1>
+</div>
+<div class="posters">
+
+    {% for i in range(6) %}
+        <div class="poster{{ i }}">
+            <a href="{{ url_for('movie_detail', movie_title=top_movie_title[i]) }}">
+                <img src="{{ poster_url[i] }}" width="200" height="300" alt="{{ top_movie_title[i] }}">
+            </a>
+            <h2>{{ top_movie_title[i] }}</h2>
+        </div>
+    {% endfor %}
+</div>
+
+</body>
+
+</html>

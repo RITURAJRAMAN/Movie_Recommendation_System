@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ movie_title }}</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.jpeg">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+<div class="background"></div>
+<div class="header">
+    <h1><a href="{{ url_for('home') }}">Movie Recommendation System</a></h1>
+</div>
+<form action="{{ url_for('recommend') }}" id="myform" method="POST" class="mainContainer">
+    <label for="title"></label>
+    <select class="searchbox" name="title" id="title" required>
+        <option value="" selected disabled hidden>Select a movie to get Recommendations</option>
+        {% for title in all_movie_list %}
+            <option value="{{ title }}">{{ title }}</option>
+        {% endfor %}
+    </select>
+    <button class="recommend" type="submit" form="myform">
+        <strong>Recommmend</strong>
+    </button>
+</form>
+
+<div class="A">
+    <div class="B">
+        <div class="_image"><img src="{{ poster_url }}" alt="Movie"></div>
+        <div class="_info">
+            <h2>{{ movie_title }}</h2>
+            <h3>Movie Description: {{ movie_overview }}</h3>
+            <h3>Release Date: {{ movie_year }}</h3>
+            <h3>Rating: {{ movie_rating }}/10</h3>
+            <h3>Cast:
+                {% for cast_name in movie_cast %}
+                    {{ cast_name }},
+                {% endfor %}
+            </h3>
+            <h3>Director:
+                {% for dir_name in movie_director %}
+                    {{ dir_name }},
+                {% endfor %}
+            </h3>
+            <h3>Runtime: {{ movie_runtime }} mins</h3>
+            <h3>Production Companies:
+                {% for comp_name in movie_production_companies %}
+                    {{ comp_name }},
+                {% endfor %}
+            </h3>
+            <h3>Production Countries:
+                {% for countries_name in movie_production_countries %}
+                    {{ countries_name }},
+                {% endfor %}
+            </h3>
+            <h3>Spoken Languages:
+                {% for L_name in movie_spoken_languages %}
+                    {{ L_name }},
+                {% endfor %}
+            </h3>
+        </div>
+    </div>
+</div>
+</body>
+</html>
